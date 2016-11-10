@@ -1,0 +1,41 @@
+<div class="container-time-tracker">
+	<form class="form-inline">
+		<div class="form-group">
+			<label for="time-tracker-current-task-name" class="sr-only">Task name</label>
+			<input type="text" class="form-control" id="time-tracker-current-task-name" placeholder="What are you working on?" ng-model="timeTrackerCtrl.currentTask.name">
+		</div>
+		<div class="form-group">
+			<label for="time-tracker-current-project-name" class="sr-only">Project name</label>
+			<select class="form-control" id="time-tracker-current-project-name" ng-model="timeTrackerCtrl.currentTask.project">
+				<option disabled hidden value="">select project</option>
+				<option ng-repeat="nameProject in timeTrackerCtrl.projectsNamesList">{{nameProject}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="time-tracker-current-task-timer" class="sr-only">Task timer</label>
+			<input type="text" class="form-control" id="time-tracker-current-task-timer" placeholder="0 Sec" ng-model="timeTrackerCtrl.currentTask.timer">
+		</div>
+		<button type="submit"
+		        class="btn btn-default time-tracker-current-task-start"
+		        ng-class="timeTrackerCtrl.currentTask.runTask?'btn-danger':'btn-success'"
+		        ng-click="timeTrackerCtrl.startStopNewTask()"
+		        ng-disabled="!timeTrackerCtrl.currentTask.project || !timeTrackerCtrl.currentTask.name"
+		>{{timeTrackerCtrl.currentTask.runTask?'Stop':'Start'}}
+		</button>
+	</form>
+
+	<div class="time-tracker-tasks-log">
+		<div ng-repeat="(day, data) in timeTrackerCtrl.taskLogList | uniqueDateLogFilter:'formatDateTask' track by day">
+			<h2 class="time-tracker-day">{{day}}</h2>
+			<div class="time-tracker-task-log clearfix" ng-repeat="(startTime, taskLog) in timeTrackerCtrl.taskLogList | customFilter: {formatDateTask: day} track by startTime">
+				<div class="log-task-name">{{taskLog.name}}</div>
+				<div class="log-task-project">{{taskLog.project}}</div>
+				<div class="log-task-quick-start"><a ng-click="timeTrackerCtrl.continueTask(startTime)" ng-hide="timeTrackerCtrl.currentTask.runTask"><span class="glyphicon glyphicon-play"></span></a></div>
+				<div class="log-task-spent-time">{{taskLog.spentTime}}</div>
+				<div class="log-task-time-range">{{taskLog.startTime | amDateFormat:'HH:mm'}} - {{taskLog.stopTime | amDateFormat:'HH:mm'}}</div>
+			</div>
+		</div>
+
+		<button type="button" class="btn btn-warning button-clear-log-list" ng-disabled="timeTrackerCtrl.currentTask.runTask" ng-click="timeTrackerCtrl.clearLogList()" ng-hide="timeTrackerCtrl.checkEmptyLogList()">Clear log list</button>
+	</div>
+</div>

@@ -1,0 +1,1 @@
+export const projectsNames = ['timer', 'webpack', 'Angular', 'Taiga', 'ecommerce', 'github', 'other'];

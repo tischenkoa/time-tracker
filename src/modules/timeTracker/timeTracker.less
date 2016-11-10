@@ -1,0 +1,53 @@
+.container-time-tracker{
+	width: 800px;
+	margin: 50px auto;
+	#time-tracker-current-task-name{
+		width: 350px;
+	}
+	#time-tracker-current-project-name{
+		width: 150px;
+	}
+	#time-tracker-current-task-timer{
+		width: 150px;
+		text-align: right;
+	}
+	.time-tracker-current-task-start{
+		width: 130px;
+	}
+	.time-tracker-task-log{
+		> div {
+			float: left;
+			margin: 10px;
+		}
+		.log-task-name{
+			width: 330px;
+		}
+		.log-task-project{
+			width: 110px;
+			font-weight: bold;
+			color: #7d52de;
+		}
+		.log-task-quick-start {
+			width: 50px;
+			span{
+				color: black;
+				font-size: 18px;
+				&:hover {
+					opacity: 0.7;
+					cursor: pointer;
+				}
+			}
+		}
+		.log-task-spent-time {
+			margin-top: 6px;
+			font-size: 20px;
+		}
+		.log-task-time-range {
+			margin-top: 10px;
+			opacity: 0.8;
+		}
+	}
+	.button-clear-log-list{
+		margin: 30px;
+	}
+}
